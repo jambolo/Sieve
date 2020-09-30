@@ -80,10 +80,12 @@ static void removeComposites(std::vector<bool>& sieve)
 static void printResults(std::vector<bool> const& sieve)
 {
     size_t limit = sieve.size();
+    int count = 1;
+    int milestone = 1;
 
     printf("[\n");
     printf("           2");
-    int count = 1;
+
     for (size_t i = 3; i < limit; ++i)
     {
         if (sieve[i])
@@ -95,8 +97,11 @@ static void printResults(std::vector<bool> const& sieve)
 
             if (verbosity > 1)
             {
-                if (count % 1000 == 0)
+                if (count == milestone * 10)
+                {
                     fprintf(stderr, "%d primes at %llu.\n", count, i);
+                    milestone *= 10;
+                }
             }
         }
     }
