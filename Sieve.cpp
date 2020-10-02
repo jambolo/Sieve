@@ -2,12 +2,12 @@
 #include <vector>
 
 static void printSyntaxAndExit(int e);
-static void removeComposites(std::vector<bool>& sieve);
-static void printResults(std::vector<bool> const& sieve);
+static void removeComposites(std::vector<bool> & sieve);
+static void printResults(std::vector<bool> const & sieve);
 
 static int verbosity = 0;
 
-int main(int argc, char** argv)
+int main(int argc, char ** argv)
 {
     size_t limit = 0;
 
@@ -18,9 +18,13 @@ int main(int argc, char** argv)
     {
         ++argv;
         if (strcmp(argv[0], "-v") == 0)
+        {
             verbosity = 1;
+        }
         else if (strcmp(argv[0], "-vv") == 0)
+        {
             verbosity = 2;
+        }
         else
         {
             if (sscanf(argv[0], "%llu", &limit) < 1)
@@ -50,7 +54,7 @@ static void printSyntaxAndExit(int e)
     exit(e);
 }
 
-static void removeComposites(std::vector<bool>& sieve)
+static void removeComposites(std::vector<bool> & sieve)
 {
     size_t limit = sieve.size();
 
@@ -66,7 +70,9 @@ static void removeComposites(std::vector<bool>& sieve)
     {
         // Skip to the next prime
         while (!sieve[p])
+        {
             ++p;
+        }
 
         // Set all multiples of p to composite
         // Optimization: start at p*p because smaller composites have already been removed by smaller primes.
@@ -77,11 +83,11 @@ static void removeComposites(std::vector<bool>& sieve)
     }
 }
 
-static void printResults(std::vector<bool> const& sieve)
+static void printResults(std::vector<bool> const & sieve)
 {
-    size_t limit = sieve.size();
-    int count = 1;
-    int milestone = 1;
+    size_t limit     = sieve.size();
+    int    count     = 1;
+    int    milestone = 1;
 
     printf("[\n");
     printf("           2");
